@@ -29,16 +29,14 @@ Since the tables are local to each Cassandra node, we need to connect to differe
 ```
 cqlsh localhost 9042 -e "
       SELECT * FROM system_views.internode_inbound;
-      SELECT * FROM system_views.internode_outbound;
-      "
+      SELECT * FROM system_views.internode_outbound;"
 ```
 
 ✅ Display messaging metrics on the second node:
 ```
 cqlsh localhost 9043 -e "
       SELECT * FROM system_views.internode_inbound;
-      SELECT * FROM system_views.internode_outbound;
-      "
+      SELECT * FROM system_views.internode_outbound;"
 ```
 
 Notice how each node records communication with its peer node in a different datacenter. When connected to the node in `DC-West`, we can see messages exchanged with the node in `DC-East` and vice versa.

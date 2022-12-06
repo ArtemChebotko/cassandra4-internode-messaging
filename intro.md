@@ -15,7 +15,7 @@
       <div class="feature col div-choice">
             <div class="scenario-description">Learn how to access internode messaging metrics.</div>
             <ul>
-              <li><span class="scenario-description-attribute">Difficulty</span>: Beginner</li>
+              <li><span class="scenario-description-attribute">Difficulty</span>: Easy</li>
               <li><span class="scenario-description-attribute">Time</span>: 10 minutes</li>
             </ul>
             <div class="scenario-objectives">In this hands-on lab, you will:</div>
