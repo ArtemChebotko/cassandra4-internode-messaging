@@ -24,15 +24,14 @@
         <br/>
         <div class="scenario-objectives">In this hands-on lab, you explored:</div>
         <ul>
-              <li><span class="scenario-objective">Keyspaces and the CQL <code>CREATE KEYSPACE</code> statement</span></li>
-              <li><span class="scenario-objective">Data replication strategies <code>SimpleStrategy</code> and <code>NetworkTopologyStrategy</code></span></li>
-              <li><span class="scenario-objective">Selecting a data replication strategy and replication factor</span></li>
-              <li><span class="scenario-objective">Useful CQL statements and CQL shell commands that work with keyspaces</span></li>
+              <li><span class="scenario-objective">Internode messaging improvements</span></li>
+              <li><span class="scenario-objective">Internode messaging metrics</span></li>
         </ul>
         <div class="resources">Learn more about Cassandra on <a href="https://datastax.com/dev" target="_blank">datastax.com/dev</a>:</div>
         <ul>
               <li><span class="resource"><a href="https://www.datastax.com/learn/cassandra-fundamentals" target="_blank">Cassandra Fundamentals</a></span></li>        
               <li><span class="resource"><a href="https://www.datastax.com/learn/data-modeling-by-example" target="_blank">Data Modeling by Example</a></span></li>
+              <li><span class="resource"><a href="https://www.datastax.com/learn/whats-new-for-cassandra-4" target="_blank">What’s New in Cassandra 4.0?</a></span></li>
         </ul>
       </div>
      </div>
