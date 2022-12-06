@@ -20,12 +20,12 @@
 
 <!-- CONTENT -->
 
-<div class="step-title">Review the metrics</div>
+<div class="step-title">Review the messaging metrics</div>
 
 Let's review the messaging metrics by querying the virtual tables. 
 Since the tables are local to each Cassandra node, we need to connect to different nodes in the claster and query their local tables.
 
-Display metrics from the first node:
+✅ Display messaging metrics on the first node:
 ```
 cqlsh localhost 9042 -e "
       SELECT * FROM system_views.internode_inbound;
@@ -33,7 +33,7 @@ cqlsh localhost 9042 -e "
       "
 ```
 
-Display metrics from the second node:
+✅ Display messaging metrics on the second node:
 ```
 cqlsh localhost 9043 -e "
       SELECT * FROM system_views.internode_inbound;
@@ -41,9 +41,7 @@ cqlsh localhost 9043 -e "
       "
 ```
 
-Notice that the tables in the first node show the DC-East datacenter, whereas the tables in the second node showed the DC-West datacenter.
-
-
+Notice how each node records communication with its peer node in a different datacenter. When connected to the node in `DC-West`, we can see messages exchanged with the node in `DC-East` and vice versa.
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">
