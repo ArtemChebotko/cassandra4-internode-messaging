@@ -20,34 +20,35 @@
 
 <!-- CONTENT -->
 
-<div class="step-title">Keyspaces with NetworkTopologyStrategy</div>
+<div class="step-title">Internode metrics and virtual tables</div>
 
-✅ Create a keyspace with name `production_keyspace_1` that uses `NetworkTopologyStrategy` and a replication factor of `1` for `DC-West`:
+One visible aspect of the Cassandra 4.x internode messaging improvements is that internode messaging metrics are now available as virtual tables. In this step, we'll show you what we mean.
 
+Each node in the Cassandra cluster has virtual tables in which Cassandra keeps internode messaging metrics.
+Table `internode_inbound` keeps track of inbound messaging metrics, and table `internode_outbound` keeps track of the outbound messaging metrics. Both tables are in the `system_views` keyspace. Note that these are not real tables. They merely _appear_ as tables to allow access to the metrics they contain. We'll use the CQL shell to look at these tables.
+
+✅ Start the CQL shell:
 ```
-CREATE KEYSPACE production_keyspace_1
-WITH replication = {'class': 'NetworkTopologyStrategy', 
-                    'DC-West': 1};
-```
-
-With `NetworkTopologyStrategy`, a replication factor is specified for each datacenter separately. 
-In the above example, the `DC-West` datacenter will have a single copy of data. 
-Not replicating data to `DC-East` could be a valid use case but usually there will be replicas in each datacenter. 
-
-✅ Create a keyspace with name `production_keyspace_2` that uses `NetworkTopologyStrategy` 
-and `1` replica in each datacenter:
-
-<details>
-  <summary>Solution</summary>
-
-```
-CREATE KEYSPACE production_keyspace_2
-WITH replication = {'class': 'NetworkTopologyStrategy', 
-                    'DC-West': 1,
-                    'DC-East': 1};
+cqlsh
 ```
 
-</details>
+✅ Shows the `internode_inbound` table schema:
+```
+DESCRIBE TABLE system_views.internode_inbound;
+```
+
+✅ Shows the `internode_outbound` table schema:
+```
+DESCRIBE TABLE system_views.internode_outbound;
+```
+
+Notice that these descriptions are embedded within comments.
+This is because the tables are virtual and were never actually created.
+
+✅ Exit the CQL shell:
+```
+exit;
+```
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">

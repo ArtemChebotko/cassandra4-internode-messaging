@@ -20,37 +20,17 @@
 
 <!-- CONTENT -->
 
-<div class="step-title">Cluster, datacenters, racks, nodes</div>
+<div class="step-title">Asynchronous messages</div>
 
-✅ Use `nodetool` to gather information about the cluster:
+A significant change to the Cassandra 4.x code has to do with how the code receives messages.
+Prior to 4.0, the code would post a read and wait for a message.
+The thread posting the read would block and not be able to do anything else until it received the message.
 
-```
-docker exec -i -t Cassandra-1 bash -c 'nodetool status'
-```
+The new code uses a Java package known as _NIO_, and a messaging framework known as _Netty_.
+This package and framework perform _asynchronous_ IO, which means the thread gets notified when it needs to receive a message.
+The result is that threads no longer block and there is less overhead associated with thread-switching and management.
 
-If the cluster only has one node in datacenter `DC-West`, **wait for the second node in datacenter `DC-East` to join** and run `nodetool status` again. The output should be similar to:
-
-<pre class="non-executable-code">
-Datacenter: DC-East
-===================
-Status=Up/Down
-|/ State=Normal/Leaving/Joining/Moving
---  Address     Load       Tokens  Owns (effective)  Host ID                               Rack 
-UN  172.17.0.3  38.05 KiB  16      100.0%            e5eb2dda-ed95-4081-9f45-f3903cd21a23  rack1
-
-Datacenter: DC-West
-===================
-Status=Up/Down
-|/ State=Normal/Leaving/Joining/Moving
---  Address     Load       Tokens  Owns (effective)  Host ID                               Rack 
-UN  172.17.0.2  74.12 KiB  16      100.0%            bc1c6aa2-b3fd-45a6-8e62-db4d420fbfdc  rack1
-</pre>
-
-
-Take a note of the datacenter names and how many nodes are in each datacenter. 
-Since the cluster has only two nodes, we can have at most two replicas. 
-In a real-life production cluster, you can usually expect to have 3 or more nodes per datacenter and replication factors of 3 or higher.
-
+The bottom line is that Cassandra 4.x can process messages without consuming as much CPU!
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">

@@ -20,24 +20,14 @@
 
 <!-- CONTENT -->
 
-<div class="step-title">Keyspace</div>
+<div class="step-title">Welcome to internode messaging</div>
 
-A *keyspace* is a namespace for a set of tables sharing a data replication strategy and some options. 
-It is conceptually similar to a "database" in a relational database management system. 
-Tables, materialized views, indexes and other schema objects are always defined within a keyspace.
+One performance enhancement of Apache Cassandra® 4.x is internode communication optimizations and tuning.
+These adjustments consist of several changes; some of these changes are just good to know about, but others you can tune with parameters.
+Many of the internode communication changes are a result of retiring technical debt.
 
-To create a keyspace, Cassandra Query Language has the `CREATE KEYSPACE` statement with the following simplified syntax:
-
-<pre class="non-executable-code">
-CREATE KEYSPACE [ IF NOT EXISTS ] keyspace_name
-    WITH REPLICATION = { replication_map };
-</pre>
-
-A *keyspace name* can contain alphanumeric characters and underscores. 
-By default, names are case-insensitive, but case sensitivity can be forced by using double quotation marks around a name.
-
-A *replication map* specifies a data replication strategy and replication factors. 
-`SimpleStrategy` and `NetworkTopologyStrategy` are two available choices for prototyping/learning and production, respectively.
+Not all of these adjustments are visible outside of the Cassandra code.
+But in this scenario, we explain the changes and show you what we can.
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">

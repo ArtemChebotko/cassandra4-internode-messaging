@@ -20,7 +20,12 @@
 
 <!-- CONTENT -->
 
-<div class="step-title">Working with keyspaces</div>
+<div class="step-title">Do the metrics add up?</div>
+
+✅ Start the CQL shell:
+```
+cqlsh
+```
 
 Try the following five CQL shell commands and CQL statements that are applicable to keyspaces. 
 

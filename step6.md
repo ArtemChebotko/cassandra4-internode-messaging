@@ -20,16 +20,30 @@
 
 <!-- CONTENT -->
 
-<div class="step-title">How many replicas do you need?</div>
+<div class="step-title">Review the metrics</div>
 
-Having `3` replicas per datacenter is a good starting point for 
-relatively small clusters. As the number of nodes in a datacenter becomes larger, 
-a higher replication factor may become a better choice.
+Let's review the messaging metrics by querying the virtual tables. 
+Since the tables are local to each Cassandra node, we need to connect to different nodes in the claster and query their local tables.
 
-The number of replicas can affect consistency, availability, latency and throughput.
-Increasing a replication factor improves availability as it becomes possible to tolerate 
-more replica failures. Also, a larger set of replicas can serve more concurrent requests 
-and result in better response times. 
+Display metrics from the first node:
+```
+cqlsh localhost 9042 -e "
+      SELECT * FROM system_views.internode_inbound;
+      SELECT * FROM system_views.internode_outbound;
+      "
+```
+
+Display metrics from the second node:
+```
+cqlsh localhost 9043 -e "
+      SELECT * FROM system_views.internode_inbound;
+      SELECT * FROM system_views.internode_outbound;
+      "
+```
+
+Notice that the tables in the first node show the DC-East datacenter, whereas the tables in the second node showed the DC-West datacenter.
+
+
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">
