@@ -22,41 +22,23 @@
 
 <div class="step-title">Do the metrics add up?</div>
 
-✅ Start the CQL shell:
+Since there are only two nodes, you would expect that the number of bytes sent from one node should be equal to the number of bytes received by the other node. Let's see if we can demonstrate that.
+
+✅ Get inbound metrics from the first node and outbound metrics from the second node:
 ```
-cqlsh
+cqlsh localhost 9042 -e "SELECT received_count, received_bytes FROM system_views.internode_inbound;" &
+cqlsh localhost 9043 -e "SELECT sent_count, sent_bytes FROM system_views.internode_outbound;"
 ```
 
-Try the following five CQL shell commands and CQL statements that are applicable to keyspaces. 
+We are only looking at two fields: the number of operations and the number of bytes.
+Isolating these metrics makes it a little easier to compare the results across nodes.
 
-✅ List the names of all keyspaces in the cluster:
-```
-DESCRIBE KEYSPACES;
-```
+Often, the number of bytes written will exceed the number of bytes read.
+You can make sense of this by considering the number of operations.
+You see that the number of write operations often exceeds the number of read operations (until the read node catches up).
 
-✅ Output all CQL statements that can be used to recreate the given keyspace
-and all the schema objects that belong to it:
-```
-DESCRIBE KEYSPACE production_keyspace_2;
-```
-
-✅ Alter properties of the given keyspace:
-```
-ALTER KEYSPACE production_keyspace_2
-WITH replication = 
-     {'class': 'NetworkTopologyStrategy',
-      'DC-West': 3, 'DC-East': 5};
-```
-
-✅ Set the given keyspace as the current working keyspace:
-```
-USE production_keyspace_2;
-```
-
-✅ Remove the given keyspace and all the objects that belong to it:
-```
-DROP KEYSPACE production_keyspace_1;
-```
+Re-run the queries (by clicking above) until the number of operations is the same for both nodes.
+You see that the number of bytes transferred also matches.
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">
